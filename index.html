@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Data Update</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.1/socket.io.js"></script>
+    <script>
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+        socket.on('update', function(data) {
+            var randomValue = data.random_value;
+            var list = document.getElementById('random-values');
+            var listItem = document.createElement('li');
+            listItem.textContent = 'Random Value: ' + randomValue;
+            list.insertBefore(listItem, list.firstChild);
+        });
+    </script>
+</head>
+<body>
+    <h1>Real-Time Data Update</h1>
+    <ul id="random-values">
+        <!-- Existing or initial values will be added here -->
+    </ul>
+</body>
+</html>
